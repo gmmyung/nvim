@@ -16,6 +16,7 @@ return {
         servers = {
           ['rust_analyzer'] = { 'rust' },
           ['lua_ls'] = { 'lua' },
+          ['clangd'] = { 'c', 'cpp' },
         },
       })
     end,
@@ -84,6 +85,7 @@ return {
           }
         }
       }
+      require('lspconfig').clangd.setup {}
     end
   }
 }
