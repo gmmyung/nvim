@@ -17,14 +17,22 @@ return {
           ['rust_analyzer'] = { 'rust' },
           ['lua_ls'] = { 'lua' },
           ['clangd'] = { 'c', 'cpp' },
+          ['ruff_lsp'] = { 'python' },
         },
       })
     end,
   },
 
+  {
+    'L3MON4D3/LuaSnip',
+    lazy = true,
+    build = 'make install_jsregexp',
+  },
+
   -- Autocompletion
   {
     'hrsh7th/nvim-cmp',
+    lazy = true,
     event = 'InsertEnter',
     dependencies = {
       { 'L3MON4D3/LuaSnip' },
@@ -86,6 +94,37 @@ return {
         }
       }
       require('lspconfig').clangd.setup {}
+      require('lspconfig').pyright.setup {
+        settings = {
+          pyright = {
+            venvPath = '.',
+            venv = '.venv',
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { '*' },
+            },
+          },
+        },
+      }
+      require('lspconfig').ruff_lsp.setup {
+        init_options = {
+          settings = {
+            interpreter = { './.venv/bin/python' },
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+          }
+        }
+      }
+      local on_attach = function(client, bufnr)
+        if client.name == 'ruff_lsp' then
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
+      end
     end
   }
 }

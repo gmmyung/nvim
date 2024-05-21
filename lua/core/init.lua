@@ -1,5 +1,3 @@
-vim.opt.termguicolors = true
-
 -- Copy yanked content to system clipboard
 vim.api.nvim_set_option("clipboard", "unnamed")
 -- <M-Esc> to escape terminal
@@ -20,3 +18,17 @@ end
 
 set_tab_settings("lua", 2, true)
 set_tab_settings("rs", 4, false)
+
+-- Remap move between windows with <C-H/J/K/L>
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+
+-- Remap <M-J/K> to <C-D/U>zz
+vim.api.nvim_set_keymap('n', '<M-j>', '<C-d>zz', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<M-k>', '<C-u>zz', { noremap = true, silent = true })
+
+-- Search result in center
+vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true, silent = true })
