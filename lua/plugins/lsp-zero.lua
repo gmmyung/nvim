@@ -8,7 +8,8 @@ return {
       -- Disable automatic setup, we are doing it manually
       vim.g.lsp_zero_extend_cmp = 0
       vim.g.lsp_zero_extend_lspconfig = 0
-      require('lsp-zero').format_on_save({
+      local lsp_zero = require('lsp-zero')
+      lsp_zero.format_on_save({
         format_opts = {
           async = false,
           timeout_ms = 1000,
@@ -20,6 +21,9 @@ return {
           ['ruff_lsp'] = { 'python' },
         },
       })
+      lsp_zero.on_attach(function(client, bufnr)
+        lsp_zero.default_keymaps({ buffer = bufnr })
+      end)
     end,
   },
 
@@ -45,17 +49,55 @@ return {
       -- And you can configure cmp even more, if you want to.
       local cmp = require('cmp')
       local cmp_action = lsp_zero.cmp_action()
+      local luasnip = require('luasnip')
 
       cmp.setup({
-        formatting = lsp_zero.cmp_format(),
-        mapping = cmp.mapping.preset.insert({
-          ['<M-Tab>'] = cmp.mapping.confirm({ select = true }),
-          ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-j>'] = cmp.mapping.scroll_docs(4),
-          ['<M-l>'] = cmp_action.luasnip_jump_forward(),
-          ['<M-h>'] = cmp_action.luasnip_jump_backward(),
-          ['<M-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ['<M-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+          end,
+        },
+        mapping = {
+          -- Super Tabbing mappings
+          ['<CR>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              if luasnip.expandable() then
+                luasnip.expand()
+              else
+                cmp.confirm({
+                  select = true,
+                })
+              end
+            else
+              fallback()
+            end
+          end),
+
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' }, -- For luasnip users.
+        }, {
+          { name = 'buffer' },
         })
       })
     end

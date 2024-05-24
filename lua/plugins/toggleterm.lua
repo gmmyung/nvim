@@ -7,6 +7,6 @@ return {
     shading_ratio = 0.1,
   },
   keys = {
-    { '<M-t>', '<cmd>ToggleTerm direction=vertical size=40<cr>', desc = 'ToggleTerm' },
+    { '<Leader>t', '<cmd>ToggleTerm direction=vertical size=60<cr>', desc = 'ToggleTerm' },
   },
 }
