@@ -1,5 +1,5 @@
 -- Copy yanked content to system clipboard
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option_value("clipboard", "unnamed", { scope = "global" })
 -- <M-Esc> to escape terminal
 vim.api.nvim_set_keymap('t', '<S-Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 -- Show relative line number
@@ -8,12 +8,12 @@ vim.wo.number = true
 
 -- Function to set tab settings for a specific filetype
 local function set_tab_settings(filetype, tabwidth, expandtab)
-  vim.api.nvim_exec(string.format([[
+  vim.api.nvim_exec2(string.format([[
     augroup %s_settings
       autocmd!
       autocmd BufEnter *.%s setlocal tabstop=%d shiftwidth=%d %s softtabstop=%d
     augroup END
-  ]], filetype, filetype, tabwidth, tabwidth, expandtab and "expandtab" or "noexpandtab", tabwidth), false)
+  ]], filetype, filetype, tabwidth, tabwidth, expandtab and "expandtab" or "noexpandtab", tabwidth), { output = false })
 end
 
 set_tab_settings("lua", 2, true)
