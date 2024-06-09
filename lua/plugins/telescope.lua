@@ -13,6 +13,7 @@ return {
         file_browser = {
           hijack_netrw = true,
           git_status = false,
+          no_ignore = true,
         }
       }
     }

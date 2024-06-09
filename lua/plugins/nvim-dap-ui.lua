@@ -1,17 +1,26 @@
 return {
   "rcarriga/nvim-dap-ui",
   dependencies = {
-    "folke/neodev.nvim",
-    'mfussenegger/nvim-dap'
+    'mfussenegger/nvim-dap',
+    'nvim-neotest/nvim-nio',
   },
-  config = function()
-    require("neodev").setup({
-      library = { plugins = { "nvim-dap-ui" }, types = true },
-    })
-    require("dapui").setup()
-  end,
+  config = true,
   keys = {
-    { '<M-d>', '<cmd>lua require("dapui").toggle()<cr>',          mode = 'n', desc = 'Toggle DAP UI' },
-    { '<M-b>', '<cmd>lua require("dap").toggle_breakpoint()<cr>', mode = 'n', desc = 'Toggle DAP breakpoints' },
+    {
+      '<M-d>',
+      function()
+        require('dapui').toggle()
+      end,
+      mode = 'n',
+      desc = 'Toggle DAP UI'
+    },
+    {
+      '<M-b>',
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      mode = 'n',
+      desc = 'Toggle DAP breakpoints'
+    },
   },
 }
