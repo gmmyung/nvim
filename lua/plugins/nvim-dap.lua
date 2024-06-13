@@ -4,7 +4,7 @@ return {
     local dap = require('dap')
     dap.adapters.lldb = {
       type = 'executable',
-      command = '/opt/homebrew/opt/llvm/bin/lldb-vscode',
+      command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
       name = 'lldb'
     }
     dap.configurations.cpp = {

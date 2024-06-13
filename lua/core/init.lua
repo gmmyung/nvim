@@ -29,6 +29,12 @@ vim.api.nvim_set_keymap('t', '<C-S-j>', '<C-\\><C-n><C-w>j', { noremap = true, s
 vim.api.nvim_set_keymap('t', '<C-S-k>', '<C-\\><C-n><C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<C-S-l>', '<C-\\><C-n><C-w>l', { noremap = true, silent = true })
 
+-- Remap window resize with <C-S-o/p/u/i>
+vim.api.nvim_set_keymap('n', '<C-S-u>', '<C-w>4<', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-S-p>', '<C-w>4>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-S-i>', '<C-w>4+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-S-o>', '<C-w>4-', { noremap = true, silent = true })
+
 
 -- Scroll result in center
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
