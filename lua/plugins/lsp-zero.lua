@@ -156,6 +156,8 @@ return {
 					client.server_capabilities.hoverProvider = false
 				end
 			end
+
+			require 'lspconfig'.cmake.setup {}
 		end
 	}
 }

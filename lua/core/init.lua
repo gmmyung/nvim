@@ -18,11 +18,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Function to set tab settings for a specific filetype
 local function set_tab_settings(filetype, tabwidth, expandtab)
 	vim.api.nvim_exec2(string.format([[
-    augroup %s_settings
-      autocmd!
-      autocmd BufEnter *.%s setlocal tabstop=%d shiftwidth=%d %s softtabstop=%d
-    augroup END
-  ]], filetype, filetype, tabwidth, tabwidth, expandtab and "expandtab" or "noexpandtab", tabwidth), { output = false })
+     augroup %s_settings
+       autocmd!
+       autocmd BufEnter *.%s setlocal tabstop=%d shiftwidth=%d %s softtabstop=%d
+     augroup END
+   ]], filetype, filetype, tabwidth, tabwidth, expandtab and "expandtab" or "noexpandtab", tabwidth), { output = false })
 end
 
 set_tab_settings('lua', 2, false)
@@ -57,3 +57,15 @@ vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true
 -- Search result in center
 vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true, silent = true })
+
+-- Disable sign column in terminal
+-- Terminal
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter", "BufEnter" }, {
+	pattern = { "term://*" },
+	callback = function()
+		vim.wo.relativenumber = false
+		vim.wo.number         = false
+		vim.o.signcolumn      = "no"
+		vim.cmd([[ startinsert ]])
+	end,
+})
