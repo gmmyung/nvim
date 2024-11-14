@@ -38,7 +38,7 @@ return {
 		},
 		config = true,
 		keys = {
-			{ '<Leader>T', '<cmd>Telescope toggleterm_manager<cr>', mode = 'n', desc = 'Telescope toggleterm_manager' },
+			{ '<Leader>t', '<cmd>Telescope toggleterm_manager<cr>', mode = 'n', desc = 'Telescope toggleterm_manager' },
 		},
 	}
 }

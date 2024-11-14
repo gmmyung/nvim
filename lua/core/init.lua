@@ -28,6 +28,15 @@ end
 set_tab_settings('lua', 2, false)
 set_tab_settings('rs', 4, false)
 set_tab_settings('md', 2, true)
+set_tab_settings('json', 2, true)
+set_tab_settings('toml', 2, true)
+set_tab_settings('yaml', 2, true)
+set_tab_settings('html', 2, true)
+set_tab_settings('css', 2, true)
+set_tab_settings('js', 2, true)
+set_tab_settings('ts', 2, true)
+set_tab_settings('jsx', 2, true)
+set_tab_settings('tsx', 2, true)
 
 -- Remap move between windows with <C-S-H/J/K/L>
 vim.api.nvim_set_keymap('n', '<C-S-h>', '<C-w>h', { noremap = true, silent = true })
