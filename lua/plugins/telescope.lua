@@ -26,6 +26,7 @@ return {
 			{ '<Leader>f', '<cmd>Telescope find_files<cr>',   mode = 'n', desc = 'Telescope find files' },
 			{ '<Leader>g', '<cmd>Telescope git_files<cr>',    mode = 'n', desc = 'Telescope git files' },
 			{ '<Leader>l', '<cmd>Telescope live_grep<cr>',    mode = 'n', desc = 'Telescope live grep' },
+			{ '<Leader>h', '<cmd>Telescope diagnostics<cr>',  mode = 'n', desc = 'Telescope diagnostics' },
 		}
 	},
 
