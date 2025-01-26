@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		'nvim-tree/nvim-web-devicons',
 	},
+	enabled = true,
 	opts = {
 		options = {
 			icons_enabled = true,
@@ -16,11 +17,6 @@ return {
 			ignore_focus = {},
 			always_divide_middle = true,
 			globalstatus = false,
-			refresh = {
-				statusline = 100,
-				tabline = 100,
-				winbar = 100,
-			}
 		},
 		sections = {
 			lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },

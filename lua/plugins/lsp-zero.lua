@@ -19,6 +19,7 @@ return {
 					['lua_ls'] = { 'lua' },
 					['clangd'] = { 'c', 'cpp' },
 					['ruff'] = { 'python' },
+					['ts_ls'] = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
 				},
 			})
 			lsp_zero.on_attach(function(_, bufnr)
@@ -130,32 +131,10 @@ return {
 					pyright = {
 						venvPath = '.',
 						venv = '.venv',
-						-- Using Ruff's import organizer
-						disableOrganizeImports = true,
-					},
-					python = {
-						analysis = {
-							-- Ignore all files for analysis to exclusively use Ruff for linting
-							ignore = { '*' },
-						},
 					},
 				},
 			}
-			require('lspconfig').ruff.setup {
-				init_options = {
-					settings = {
-						interpreter = { './.venv/bin/python' },
-						-- Any extra CLI arguments for `ruff` go here.
-						args = {},
-					}
-				}
-			}
-			local on_attach = function(client, bufnr)
-				if client.name == 'ruff' then
-					-- Disable hover in favor of Pyright
-					client.server_capabilities.hoverProvider = false
-				end
-			end
+			require('lspconfig').ts_ls.setup {}
 
 			require 'lspconfig'.cmake.setup {}
 		end

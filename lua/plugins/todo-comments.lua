@@ -20,6 +20,12 @@ return {
 			end,
 			mode = 'n',
 			desc = 'Prev todo comment'
-		}
+		},
+		{
+			'<Leader>T',
+			'<cmd>TodoTelescope<cr>',
+			mode = 'n',
+			desc = 'Telescope todo comments'
+		},
 	}
 }
