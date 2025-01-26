@@ -1,10 +1,13 @@
 -- Copy yanked content to system clipboard
-vim.api.nvim_set_option_value("clipboard", "unnamed", { scope = "global" })
+vim.api.nvim_set_option_value("clipboard", "unnamedplus", { scope = "global" })
 -- <M-Esc> to escape terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 -- Show relative line number
 vim.wo.relativenumber = true
 vim.wo.number = true
+
+-- Disable termsync
+vim.opt.termsync = false
 
 -- Highlight area on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -14,6 +17,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Enable osc52
+vim.g.clipboard = {
+	name = 'OSC 52',
+	copy = {
+		['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+		['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+	},
+	paste = {
+		['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+		['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+	},
+}
 
 -- Function to set tab settings for a specific filetype
 local function set_tab_settings(filetype, tabwidth, expandtab)

@@ -1,7 +1,5 @@
 return {
 	'akinsho/toggleterm.nvim',
-	branch = 'main',
-	version = "*",
 	opts = {
 		shading_factor = -30,
 		shading_ratio = 0.1,
