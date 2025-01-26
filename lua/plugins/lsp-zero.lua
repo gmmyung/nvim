@@ -18,7 +18,7 @@ return {
 					['rust_analyzer'] = { 'rust' },
 					['lua_ls'] = { 'lua' },
 					['clangd'] = { 'c', 'cpp' },
-					['ruff_lsp'] = { 'python' },
+					['ruff'] = { 'python' },
 				},
 			})
 			lsp_zero.on_attach(function(_, bufnr)
@@ -141,7 +141,7 @@ return {
 					},
 				},
 			}
-			require('lspconfig').ruff_lsp.setup {
+			require('lspconfig').ruff.setup {
 				init_options = {
 					settings = {
 						interpreter = { './.venv/bin/python' },
@@ -151,7 +151,7 @@ return {
 				}
 			}
 			local on_attach = function(client, bufnr)
-				if client.name == 'ruff_lsp' then
+				if client.name == 'ruff' then
 					-- Disable hover in favor of Pyright
 					client.server_capabilities.hoverProvider = false
 				end

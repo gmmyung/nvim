@@ -1,7 +1,5 @@
 return {
-	'gmmyung/toggleterm.nvim',
-	branch = 'shade_ratio',
-	version = "*",
+	'akinsho/toggleterm.nvim',
 	opts = {
 		shading_factor = -30,
 		shading_ratio = 0.1,
