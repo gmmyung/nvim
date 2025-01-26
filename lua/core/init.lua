@@ -37,6 +37,12 @@ set_tab_settings('js', 2, true)
 set_tab_settings('ts', 2, true)
 set_tab_settings('jsx', 2, true)
 set_tab_settings('tsx', 2, true)
+set_tab_settings('c', 2, true)
+set_tab_settings('cpp', 2, true)
+set_tab_settings('h', 2, true)
+set_tab_settings('hpp', 2, true)
+set_tab_settings('cmake', 2, true)
+
 
 -- Remap move between windows with <C-S-H/J/K/L>
 vim.api.nvim_set_keymap('n', '<C-S-h>', '<C-w>h', { noremap = true, silent = true })
@@ -57,6 +63,11 @@ vim.api.nvim_set_keymap('t', '<C-S-u>', '<C-\\><C-n><C-w><i', { noremap = true, 
 vim.api.nvim_set_keymap('t', '<C-S-p>', '<C-\\><C-n><C-w>>i', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<C-S-i>', '<C-\\><C-n><C-w>+i', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<C-S-o>', '<C-\\><C-n><C-w>-i', { noremap = true, silent = true })
+
+
+-- HACK: https://github.com/wez/wezterm/issues/4607
+-- Turning off termsync for now to stop line breaking
+vim.opt.termsync = false
 
 
 -- Scroll result in center
